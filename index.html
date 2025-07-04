@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YQT BOT PRO</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #doc__wrapper {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        #title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        #content__wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        #banner {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        #banner img {
+            border-radius: 8px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .platform__wrapper, .pair__wrapper {
+            width: 100%;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            background-color: white;
+            font-size: 16px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        #trade__wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #signal {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #signal:hover {
+            background: #2980b9;
+        }
+
+        #center {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #result {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 6px;
+            font-size: 18px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .rem__time {
+            text-align: center;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="doc__wrapper">
+        <div id="title">YQT BOT PRO</div>
+        <div id="content__wrapper">
+            <div id="banner">
+                <img src="./yqt.jpg" alt="YQT Bot" width="200">
+            </div>
+            <div class="platform__wrapper">
+                <select id="platform__box" class="platform__select">
+                    <option value="q">QUOTEX</option>
+                    <option value="p">POCKET OPTION</option>
+                    <option value="b">BINOMO</option>
+                    <option value="o">OLYMP</option>
+                    <option value="i">IQ OPTION</option>
+                    <option value="e">EXPERT OPTION</option>
+                </select>
+            </div>
+            <div class="pair__wrapper">
+                <select id="pair__box" class="pair__select">
+                    <option value="eur/usd">EUR/USD</option>
+                    <option value="gbp/usd">GBP/USD</option>
+                    <option value="usd/jpy">USD/JPY</option>
+                    <option value="btc/usd">BTC/USD</option>
+                    <option value="eth/usd">ETH/USD</option>
+                </select>
+                <select id="time__box" class="time__select">
+                    <option value="5s">5 Seconds</option>
+                    <option value="10s">10 Seconds</option>
+                    <option value="15s">15 Seconds</option>
+                    <option value="30s">30 Seconds</option>
+                    <option selected value="1m">1 Minute</option>
+                    <option value="2m">2 Minutes</option>
+                    <option value="5m">5 Minutes</option>
+                </select>
+            </div>
+            <div id="trade__wrapper">
+                <button id="signal">GET SIGNAL</button>
+                <div class="rem__time">Ready to generate signals</div>
+            </div>
+            <div id="center">
+                <div id="result">Signal will appear here</div>
+            </div>
+        </div>
+    </div>
+    <script src="./cdns/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Simple signal generator
+            $('#signal').click(function() {
+                $('.rem__time').text('Generating signal...');
+                
+                setTimeout(function() {
+                    const directions = ['CALL', 'PUT'];
+                    const direction = directions[Math.floor(Math.random() * directions.length)];
+                    $('#result').text(direction).css({
+                        'background': direction === 'CALL' ? '#2ecc71' : '#e74c3c'
+                    });
+                    $('.rem__time').text('Signal generated at: ' + new Date().toLocaleTimeString());
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+
+</html>
